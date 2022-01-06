@@ -21,7 +21,7 @@ const thoughtSchema = new Schema(
             required: true
         },
         // use subdocument reactionSchema  
-        reactions: [reactionSchema]
+        // reactions: [reactionSchema]
     },
     {
         toJSON: {

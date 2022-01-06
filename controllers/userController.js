@@ -32,7 +32,7 @@ module.exports = {
         User.findByIdAndUpdate(
             { _id: req.params.userId },
             { $set: req.body },
-            { runValidators: true, new: true }
+            { new: true }
         )
         .then((userdata) => 
         !userdata
@@ -52,4 +52,32 @@ module.exports = {
         .then(() => res.json({ message: 'User and associated apps deleted!' }))
         .catch((err) => res.status(500).json(err));
     },
+    //add friend
+    addFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.params.friendId } },
+            { new: true }
+        )
+        .then((user) =>
+        !user
+        ? res.status(404).json({ message: "No such user exists!" })
+        : res.json(user)
+        )
+        .catch((err) => res.status(500).json(err));
+    },
+    //delete friend
+    deleteFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+        )
+        .then((user) =>
+        !user
+        ? res.status(404).json({ message: "No such user exists!" })
+        : res.json({message: "Friend successfully removed from the list."})
+        )
+        .catch((err) => res.status(500).json(err));
+      },
 };

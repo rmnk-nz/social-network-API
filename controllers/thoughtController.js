@@ -3,7 +3,7 @@ const { User, Thought } = require('../models');
 module.exports = {
     //get thought by id
     getSingleThought(req, res) {
-        User.findOne({ _id: req.params.thoughtId })
+        Thought.findOne({ _id: req.params.thoughtId })
         .then((thought) =>
         !thought
         ? res.status(404).json({ message: 'User Thought does not Exist' })

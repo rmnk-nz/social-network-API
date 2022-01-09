@@ -14,7 +14,7 @@ router.route('/').get(getUsers).post(createUser);
 router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
 
 //Friend Routes
-router.route("/:userId/friends/:friendId").post(addFriend);
-router.route("/:userId/friends/:friendId").delete(deleteFriend);
+router.route('/:userId/friends/:friendId').post(addFriend);
+router.route('/:userId/friends/:friendId').delete(deleteFriend);
 
 module.exports = router;
